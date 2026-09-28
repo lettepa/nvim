@@ -1,0 +1,1 @@
+require("lettepa.colorscheme").setup()
