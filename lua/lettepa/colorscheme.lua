@@ -2,7 +2,12 @@ local M = {}
 
 local config = require("lettepa.config")
 local colors = require("lettepa.colors")
-local builtin_groups = require("lettepa.groups.builtin")
+local mini_groups = require("lettepa.groups.mini")
+local group_sources = {
+  { name = "builtin", get = require("lettepa.groups.builtin").get },
+  { name = "mini", module = "statusline", get = mini_groups.get_statusline },
+  { name = "mini", module = "tabline", get = mini_groups.get_tabline },
+}
 
 local augroup_name = "LettepaColorscheme"
 local active_style
@@ -50,10 +55,13 @@ function M.apply(clear)
 
   local style = get_style()
   local palette = colors.palette[style]
-  local groups = builtin_groups.get(palette)
-
-  for name, attributes in pairs(groups) do
-    vim.api.nvim_set_hl(0, name, to_highlight_spec(attributes))
+  -- Builtins come first so optional integrations may override shared groups.
+  for _, source in ipairs(group_sources) do
+    if config.is_group_enabled(source.name, source.module) then
+      for name, attributes in pairs(source.get(palette)) do
+        vim.api.nvim_set_hl(0, name, to_highlight_spec(attributes))
+      end
+    end
   end
 
   vim.g.colors_name = "lettepa"
