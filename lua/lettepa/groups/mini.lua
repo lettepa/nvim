@@ -1,5 +1,13 @@
 local M = {}
 
+-- mini.indentscope
+function M.get_indentscope(p)
+  return {
+    MiniIndentscopeSymbol = { fg = p.bg0 },
+    MiniIndentscopeSymbolOff = { link = "MiniIndentscopeSymbol" },
+  }
+end
+
 -- mini.statusline
 function M.get_statusline(p)
   return {

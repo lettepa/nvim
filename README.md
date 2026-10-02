@@ -51,11 +51,12 @@ All highlight groups are enabled by default.
 | Group | Source | Highlight definitions |
 | --- | --- | --- |
 | `builtin` | [Neovim] built-in highlights | `:help highlight` |
+| `mini.indentscope` | [mini.nvim] `mini.indentscope` | `:help MiniIndentscope-hl-groups` |
 | `mini.statusline` | [mini.nvim] `mini.statusline` | `:help MiniStatusline-hl-groups` |
 | `mini.tabline` | [mini.nvim] `mini.tabline` | `:help MiniTabline-hl-groups` |
 
-Set `mini = true` to enable both Mini modules (the default behavior), or
-`mini = false` to disable both. To select them individually, use a table;
+Set `mini = true` to enable all supported Mini modules (the default behavior),
+or `mini = false` to disable them all. To select them individually, use a table;
 omitted entries remain enabled:
 
 ```lua

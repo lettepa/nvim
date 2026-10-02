@@ -5,6 +5,7 @@ local colors = require("lettepa.colors")
 local mini_groups = require("lettepa.groups.mini")
 local group_sources = {
   { name = "builtin", get = require("lettepa.groups.builtin").get },
+  { name = "mini", module = "indentscope", get = mini_groups.get_indentscope },
   { name = "mini", module = "statusline", get = mini_groups.get_statusline },
   { name = "mini", module = "tabline", get = mini_groups.get_tabline },
 }

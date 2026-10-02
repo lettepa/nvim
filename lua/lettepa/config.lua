@@ -8,6 +8,7 @@ local default_options = {
   groups = {
     builtin = true,
     mini = {
+      indentscope = true,
       statusline = true,
       tabline = true,
     },
@@ -71,10 +72,7 @@ function M.setup(opts)
       elseif type(enabled) == "table" then
         for module, selected in pairs(enabled) do
           if default_options.groups.mini[module] == nil then
-            error(
-              "lettepa: mini group keys must be 'statusline' or 'tabline'",
-              2
-            )
+            error("lettepa: unknown mini group " .. tostring(module), 2)
           end
           if type(selected) ~= "boolean" then
             error("lettepa: mini group values must be booleans", 2)
